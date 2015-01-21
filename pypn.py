@@ -67,7 +67,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Sends push notifications')
     parser.add_argument("type", type=str, choices=push_types.keys(), help="Type of push")
     parser.add_argument("--msg", "-m", type=str, help="Message to send")
-    parser.add_argument("--cert", "-c", type=str, help="Certificate to use")
+    parser.add_argument("--cert", "-c", type=str, help="Certificate to use (abs path)")
     parser.add_argument("--token", "-t", type=str, help="Token to use")
 
     args = parser.parse_args()
