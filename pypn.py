@@ -55,8 +55,10 @@ def handle_regular(args):
 
 def handle_silent(args):
     check_for_musts(args)
+    check_for(args, "sptype")
 
-    os.system("apn push {token} -c {cert} -e development -P".format(token=args.token, cert=args.cert) + """ '{"aps" : {"content-available": 1}}'""")
+    os.system("apn push {token} -c {cert} -e development -P".format(token=args.token, cert=args.cert) + """ '{"aps" : {"content-available": 1}""" 
+        """, "silentNotificationType" : \"""" + args.sptype + """\"}'""")
 
 ###############################################
 
@@ -69,6 +71,7 @@ if __name__ == "__main__":
     parser.add_argument("--msg", "-m", type=str, help="Message to send")
     parser.add_argument("--cert", "-c", type=str, help="Certificate to use (abs path)")
     parser.add_argument("--token", "-t", type=str, help="Token to use")
+    parser.add_argument("--sptype", "-s", type=str, choices=["FETCH_ID_ALERTS"], help="Silent push type")
 
     args = parser.parse_args()
     args = merge_config_into_args(args, load_config())
